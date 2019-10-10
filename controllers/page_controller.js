@@ -1,5 +1,6 @@
 function index(req, res) {
-  res.send("Welcome");
+  req.session.views = req.session.views ? req.session.views + 1 : 1;
+  res.json(req.session.views);
 }
 
 module.exports = {
