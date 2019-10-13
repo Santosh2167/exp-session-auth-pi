@@ -5,6 +5,7 @@ const AuthenticationController = require("./../controllers/authentication_contro
 const { celebrate, Joi } = require("celebrate");
 const { authorize, check_user } = require("./../middleware/authentication_middleware");
 
+
 router.get("/", PageController.index);
 
 router.get("/login", check_user, AuthenticationController.loginForm);

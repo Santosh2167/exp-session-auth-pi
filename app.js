@@ -3,6 +3,7 @@ const exphbs = require("express-handlebars");
 const morgan = require("morgan");
 const expressSession = require("express-session");
 const app = express();
+const MongoStore = require("connect-mongo")(expressSession);
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
