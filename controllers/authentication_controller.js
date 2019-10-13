@@ -1,6 +1,7 @@
 const UserModel = require("./../database/models/user_ model");
 
 function loginForm(req, res) {
+  res.render("auth/login");
 
 }
 
@@ -13,6 +14,16 @@ function make(req, res) {
 
 }
 
+function logout(req, res) {
+  req.session.user = "";
+  res.redirect("/");
+
+
+  // req.session.destroy(() => {
+  //   res.redirect("/");
+  // })
+
+}
 async function create(req, res) {
   //res.send(req.body);
   const user = await UserModel.create(req.body);
@@ -27,6 +38,7 @@ module.exports = {
   loginForm,
   loginVerify,
   make,
-  create
+  create,
+  logout
 
 }

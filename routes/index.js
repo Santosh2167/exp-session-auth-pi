@@ -24,4 +24,6 @@ router.post("/register", celebrate({
 
 router.get("/dashboard", PageController.dashboard);
 
+router.get("/logout", AuthenticationController.logout);
+
 module.exports = router;
