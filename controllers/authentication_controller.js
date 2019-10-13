@@ -1,3 +1,5 @@
+const UserModel = require("./../database/models/user_ model");
+
 function loginForm(req, res) {
 
 }
@@ -11,8 +13,13 @@ function make(req, res) {
 
 }
 
-function create(req, res) {
+async function create(req, res) {
+  //res.send(req.body);
+  const user = await UserModel.create(req.body);
 
+  console.log("user", user);
+  req.session.user = user;
+  res.redirect("/dashboard");
 }
 
 

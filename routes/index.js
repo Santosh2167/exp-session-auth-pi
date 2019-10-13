@@ -14,11 +14,14 @@ router.post("/login", celebrate({
 }), AuthenticationController.loginVerify);
 
 router.get("/register", AuthenticationController.make);
+
 router.post("/register", celebrate({
   body: {
     email: Joi.string().required(),
     password: Joi.string().required()
   }
 }), AuthenticationController.create);
+
+router.get("/dashboard", PageController.dashboard);
 
 module.exports = router;
