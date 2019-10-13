@@ -3,9 +3,12 @@ const router = express.Router();
 const PageController = require("./../controllers/page_controller");
 const AuthenticationController = require("./../controllers/authentication_controller");
 const { celebrate, Joi } = require("celebrate");
+const { authorize, check_user } = require("./../middleware/authentication_middleware");
 
 router.get("/", PageController.index);
-router.get("/login", AuthenticationController.loginForm);
+
+router.get("/login", check_user, AuthenticationController.loginForm);
+
 router.post("/login", celebrate({
   body: {
     email: Joi.string().required(),
@@ -13,7 +16,7 @@ router.post("/login", celebrate({
   }
 }), AuthenticationController.loginVerify);
 
-router.get("/register", AuthenticationController.make);
+router.get("/register", check_user, AuthenticationController.make);
 
 router.post("/register", celebrate({
   body: {
@@ -22,7 +25,7 @@ router.post("/register", celebrate({
   }
 }), AuthenticationController.create);
 
-router.get("/dashboard", PageController.dashboard);
+router.get("/dashboard", authorize, PageController.dashboard);
 
 router.get("/logout", AuthenticationController.logout);
 
